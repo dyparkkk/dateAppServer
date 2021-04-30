@@ -1,12 +1,12 @@
 const express = require('express');
-const User = require('../schemas/user');
+// const User = require('../schemas/user');
 
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.find({});
-    res.render('index', { users });
+    // const users = await User.find({});
+    res.render('index');
     console.log(req.session);
   } catch (err) {
     console.error(err);

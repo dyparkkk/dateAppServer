@@ -8,19 +8,19 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 // const webSocket = require('./socket');
-const connect = require('./schemas');
+// const connect = require('./schemas');
 const indexRouter = require('./routes/index');
-const userRouter = require('./routes/users');
+// const userRouter = require('./routes/users');
 const testRouter = require('./routes/jsontest');
 
 const app = express();
-app.set('port', process.env.PORT || 3020);
+app.set('port', process.env.PORT || 8080);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
     watch: true,
 });
-connect();
+// connect();
 
 const sessionOption = session({
     resave: false,
@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: false}));
 app.use(sessionOption);
 
 app.use('/', indexRouter);
-app.use('/users', userRouter);
+// app.use('/users', userRouter);
 app.use('/jsontest', testRouter);
 
 app.use((req, res, next) => {
