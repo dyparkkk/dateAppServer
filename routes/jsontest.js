@@ -4,7 +4,9 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    res.send('hello test');
+    res.json({ 
+      user: 'dypark',
+      position: 'back-end dev'});
     console.log(req.session);
   } catch (err) {
     console.error(err);
