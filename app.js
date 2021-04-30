@@ -11,7 +11,7 @@ dotenv.config();
 const connect = require('./schemas');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
-const testRouter = require('./jsontest');
+const testRouter = require('./routes/jsontest');
 
 const app = express();
 app.set('port', process.env.PORT || 3020);
