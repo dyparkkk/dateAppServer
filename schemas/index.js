@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const { MONGO_ID, MONGO_PASSWORD, NODE_ENV } = process.env;
-const MONGO_URL = `mongodb://${MONGO_ID}:${MONGO_PASSWORD}@localhost:27017/admin`;
-const connect = ()=>{
+const { MONGO_PASSWORD, NODE_ENV } = process.env;
+const MONGO_URL = `mongodb+srv://dyparkkk:${MONGO_PASSWORD}@cluster0.4tctp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const connectDB = ()=>{
     if(process.env.NODE_ENV !== 'production'){
         mongoose.set('debug', true);
     }
     mongoose.connect(MONGO_URL,{
-        dbName: 'nodejs',
+        dbName: 'dateApp',
         useNewUrlParser: true,
         useCreateIndex: true,
     });
@@ -29,4 +29,4 @@ mongoose.connection.on('error', (error) => {
     //connect();
   });
   
-  module.exports = connect;
+  module.exports = connectDB;

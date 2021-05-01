@@ -1,29 +1,15 @@
 const mongoose = require('mongoose');
+const { renderString } = require('nunjucks');
 
 const { Schema } = mongoose;
-const { Types: { ObjectId } } = Schema;
 const userSchema = new Schema({
-    name: {
+    id: {
         type: String,
-        required: true,  
         unique: true,
     },
-    age: {
-        type: Number,
-        require: true,
-    },
-    phone:{
-        type: Number,
-        require: true,
-    },
-    mbti: {
-        type: String,
-        required: true,
-    },
-    friendList:{
-        type: ObjectId,
-        ref: 'User',
-    },
+    name: String,
+    pwd: String,
+    friendList:[new mongoose.Schema({friendId: String, name:String})],
 });
 
 module.exports = mongoose.model('User', userSchema);

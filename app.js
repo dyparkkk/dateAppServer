@@ -8,10 +8,11 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 // const webSocket = require('./socket');
-// const connect = require('./schemas');
+const connect = require('./schemas');
 const indexRouter = require('./routes/index');
-// const userRouter = require('./routes/users');
+const userRouter = require('./routes/users');
 const testRouter = require('./routes/jsontest');
+// const postRouter = require('./routes/posttest');
 
 const app = express();
 app.set('port', process.env.PORT || 8080);
@@ -20,7 +21,7 @@ nunjucks.configure('views', {
     express: app,
     watch: true,
 });
-// connect();
+connect();
 
 const sessionOption = session({
     resave: false,
@@ -44,8 +45,9 @@ app.use(express.urlencoded({ extended: false}));
 app.use(sessionOption);
 
 app.use('/', indexRouter);
-// app.use('/users', userRouter);
+app.use('/users', userRouter);
 app.use('/jsontest', testRouter);
+// app.use('/posttest', postRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} Not found`);
