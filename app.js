@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 // const webSocket = require('./socket');
-const connect = require('./schemas');
+const connectDB = require('./schemas');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const testRouter = require('./routes/jsontest');
@@ -21,7 +21,7 @@ nunjucks.configure('views', {
     express: app,
     watch: true,
 });
-connect();
+connectDB();
 
 const sessionOption = session({
     resave: false,

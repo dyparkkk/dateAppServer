@@ -18,7 +18,7 @@ router.route('/')
             const user = await User.create({
                 id: req.body.id,
                 name: req.body.name,
-                pwd: req.doby.pwd,
+                pwd: req.body.pwd,
             });
             console.log(user);
             res.status(201).json(user);
