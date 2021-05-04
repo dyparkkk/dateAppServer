@@ -1,7 +1,6 @@
 const express = require('express');
-// const passport = require('passport');
+const passport = require('passport');
 const bcrypt = require('bcrypt');
-
 const User = require('../schemas/user');
 
 const router = express.Router();
@@ -15,10 +14,10 @@ router.post('/join', async(req, res, next) => {
             return res.redirect('/join?error=exist');
         }
         const hash = await bcrypt.hash(password, 8);
-        const user = await User.create({
-            id: req.body.id,
-            name: req.body.name,
-            pwd: req.body.pwd,
+        await User.create({
+            id:id,
+            name: name,
+            password: hash,
         });
         return res.redirect('/');
     } catch(error){
@@ -26,3 +25,24 @@ router.post('/join', async(req, res, next) => {
         return next(error);
     }
 });
+
+router.post('/login',(req, res, next) => {
+    passport.authenticate('local', (authError, user, info)=>{
+        if(authError){
+            console.error(authError);
+            return next(authError);
+        }
+        if(!user){
+            return res.redirect(`/?loginError=${info.message}`);
+        }
+        return req.login(user, (loginError) => {
+            if(loginError){
+                console.error(loginError);
+                return next(loginError);
+            }
+            return res.redirect('/');
+        });
+    })(req, res, next);
+});
+
+module.exports = router;

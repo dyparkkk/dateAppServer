@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
-// const passport = require('passport');
+const passport = require('passport');
 
 dotenv.config();
 // const webSocket = require('./socket');
@@ -13,11 +13,11 @@ const connectDB = require('./schemas');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const testRouter = require('./routes/jsontest');
-// const passportConfig = require('./passport');
+const passportConfig = require('./passport');
 
 
 const app = express();
-// passportConfig();
+passportConfig();
 app.set('port', process.env.PORT || 8081);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
@@ -46,8 +46,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
 app.use(sessionOption);
-// app.use(passport.initialize());
-// app.use(Passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
