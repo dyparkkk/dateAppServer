@@ -1,5 +1,5 @@
 const passport = require('passport');
-const local = require('./localStrategy');
+const local = require('./localstrategy');
 const User = require('../schemas/user');
 
 module.exports = () => {
