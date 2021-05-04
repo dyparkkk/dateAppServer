@@ -1,6 +1,6 @@
 {
   "name": "dateproj",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
     "color-hash": "^1.1.1",
     "cookie-parser": "^1.4.5",
     "cross-env": "^7.0.3",
@@ -22,6 +23,8 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "nunjucks": "^3.2.3",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pm2": "^4.5.6",
     "socket.io": "^4.0.1"
   },

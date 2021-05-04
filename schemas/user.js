@@ -10,6 +10,8 @@ const userSchema = new Schema({
     name: String,
     pwd: String,
     friendList:[new mongoose.Schema({friendId: String, name:String})],
+},{
+    versionKey: false
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
+const passport = require('passport');
 
 dotenv.config();
 // const webSocket = require('./socket');
@@ -12,10 +13,12 @@ const connectDB = require('./schemas');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const testRouter = require('./routes/jsontest');
-// const postRouter = require('./routes/posttest');
+// const passportConfig = require('./passport');
+
 
 const app = express();
-app.set('port', process.env.PORT || 8080);
+// passportConfig();
+app.set('port', process.env.PORT || 8081);
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
@@ -43,11 +46,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
 app.use(sessionOption);
+// app.use(passport.initialize());
+// app.use(Passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
 app.use('/jsontest', testRouter);
-// app.use('/posttest', postRouter);
+
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} Not found`);
