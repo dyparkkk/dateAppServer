@@ -6,20 +6,26 @@ const User = require('../schemas/user');
 const router = express.Router();
 
 router.post('/join', async(req, res, next) => {
-    const {id,name, password} = req.body;
+    const {id, name, pwd} = req.body;
     try {
-        const exUser = await (await User.findOne({id: `${id}`})).exec();
+        const exUser = await User.findOne({id: `${id}`});
+        console.log(exUser);
         if(exUser){
-            res.send('중복');
-            return res.redirect('/join?error=exist');
+            return res.json({
+                success: false,
+                errorType: "exist-user",
+                message: "이미 존재하는 id입니다. "
+            })
         }
-        const hash = await bcrypt.hash(password, 8);
+        const hash = await bcrypt.hash(pwd, 8);
         await User.create({
             id:id,
             name: name,
-            password: hash,
+            pwd: hash,
         });
-        return res.redirect('/');
+        return res.json({
+            success:true
+        })
     } catch(error){
         console.error(error);
         return next(error);
@@ -33,14 +39,20 @@ router.post('/login',(req, res, next) => {
             return next(authError);
         }
         if(!user){
-            return res.redirect(`/?loginError=${info.message}`);
+            return res.json({
+                success:false,
+                errorType: `loginError-${info.errorType}`,
+                message:`${info.message}`
+            });
         }
         return req.login(user, (loginError) => {
             if(loginError){
                 console.error(loginError);
                 return next(loginError);
             }
-            return res.redirect('/');
+            return res.json({
+                success:true
+            });
         });
     })(req, res, next);
 });

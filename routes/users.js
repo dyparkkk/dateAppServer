@@ -35,9 +35,4 @@ router.get('/:id', async(req, res, next)=>{
     
 })
 
-router.get('/chat', async(req, res, next) => {
-    res.render('chat');
-})
-
-
 module.exports = router;

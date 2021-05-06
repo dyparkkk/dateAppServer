@@ -12,6 +12,7 @@ dotenv.config();
 const connectDB = require('./schemas');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 const testRouter = require('./routes/jsontest');
 const passportConfig = require('./passport');
 
@@ -39,7 +40,7 @@ const sessionOption = session({
 if(process.env.NODE_ENV === 'production'){
     app.use(morgan('combined'));
 } else {
-    app.use(morgan('dev'));
+    app.use(morgan('common'));
 }
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
@@ -51,6 +52,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
+app.use('/auth', authRouter);
 app.use('/jsontest', testRouter);
 
 
