@@ -28,11 +28,19 @@ router.route('/')
         }
     });
 
-router.get('/:id', async(req, res, next)=>{
-    const message = "hihi";
-    // res.render('chat', {message});
-    res.redirect(`/users/chat`);
-    
-})
+router.get('/hi', async(req, res, next)=>{
+    try{
+        if(req.user){
+            res.send(`hi ${req.user.name}`);
+            console.log(req.user);
+        }
+        else {
+            res.send("not login");
+        }
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 module.exports = router;

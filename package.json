@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production PORT=80 pm2 start app.js",
+    "start": "cross-env NODE_ENV=n PORT=80 pm2 start app.js",
     "dev": "cross-env PORT=8080 nodemon app",
     "awsDev": "cross-env PORT=80 nodemon app"
   },
