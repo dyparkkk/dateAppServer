@@ -28,6 +28,22 @@ router.route('/')
         }
     });
 
+router.get('/user', async(req, res, next)=> {
+    try{
+        if(req.user){
+            res.json({
+                name: req.user.name,
+                friendList: req.user.friendList
+            });
+        } else{
+            res.send("not login");
+        }
+    } catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
 router.get('/hi', async(req, res, next)=>{
     try{
         if(req.user){

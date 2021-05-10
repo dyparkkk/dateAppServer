@@ -57,4 +57,21 @@ router.post('/login',(req, res, next) => {
     })(req, res, next);
 });
 
+router.get('/logout', (req, res, next) => {
+    if(req.isAuthenticated()){
+        req.logOut();
+        req.session.destroy();
+        res.json({
+            success:true,
+
+        });
+    } else{
+        res.json({
+            success:false,
+            errorType: "logoutError-notLogin",
+            message:"로그인 필요"
+        })
+    }
+});
+
 module.exports = router;
