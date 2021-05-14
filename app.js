@@ -47,7 +47,7 @@ if(process.env.NODE_ENV === 'production'){
 } else {
     app.use(morgan('common'));
 }
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 

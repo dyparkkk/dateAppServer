@@ -3,4 +3,3 @@ uploads
 *.log
 coverage
 .env
-public
