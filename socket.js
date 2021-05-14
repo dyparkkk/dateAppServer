@@ -1,4 +1,4 @@
-const {addUser} = require('../helpers/misc');
+const {addUser} = require('./helpers/misc');
 const User = require('./schemas/user');
 
 module.exports = (io)=>{
