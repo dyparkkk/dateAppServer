@@ -1,3 +1,4 @@
+const {addUser} = require('../helpers/misc');
 const User = require('./schemas/user');
 
 module.exports = (io)=>{
@@ -9,6 +10,11 @@ module.exports = (io)=>{
         socket.on('getUsers', async()=> {
             const users = await User.find({});
             io.emit('getAllUsers', users);
+        });
+
+        socket.on('oneToOneChat', ({recieverID, senderID, recieverName}, callback) => {
+            addUser({recieverID, senderID, recieverName});
+            console.log(addUser);
         });
     });
 };
