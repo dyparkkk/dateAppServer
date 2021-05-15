@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     // const users = await User.find({});
-    res.render('index');
     console.log(req.session);
   } catch (err) {
     console.error(err);

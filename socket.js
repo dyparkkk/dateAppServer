@@ -13,7 +13,7 @@ module.exports = (io)=>{
             io.emit('getAllUsers', users);
         });
 
-        loadMessages(socket); 
+        loadMessages(socket);
 
         socket.on('oneToOneChat', ({recieverID, senderID, recieverName}, callback) => {
             console.log("oneToOneChat");
