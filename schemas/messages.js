@@ -7,6 +7,7 @@ const MessagesSchema = new Schema({
     recieverID : {type: String, required: true},
     txtmsg: {type: String, required: true},
     time: {type: String, default: Date.now},
-});
+},
+{ typeKey: '$type' });
 
 module.exports = mongoose.model('Messages', MessagesSchema);
