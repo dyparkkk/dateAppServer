@@ -42,6 +42,7 @@ module.exports = (io)=>{
                 time,
                 txtmsg,
             }).save();
+            console.log(`send message from ${data.senderID} to ${recieverID}`);
         });
     });
 };
