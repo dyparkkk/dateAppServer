@@ -1,4 +1,4 @@
-const Chats = require('../schemas/Chats');
+const Chats = require('../schemas/chats');
 const { v4: uuidV4 } = require('uuid');
 const socket = require('../socket');
 const Messages = require('../schemas/messages');
