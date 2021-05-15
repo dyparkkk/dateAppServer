@@ -41,7 +41,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
             socket.emit('openChat', newChat);
             // store newChat
             new Chats(newChat).save();
-            console.log("create new Chat ", roomID );
+            console.log("create new Chat ", newChat);
         }
     }
 };
