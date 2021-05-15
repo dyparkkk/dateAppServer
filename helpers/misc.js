@@ -46,7 +46,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
     }
 };
 
-const loadMessages = (socket) => {
+const loadMessages = (socket, io) => {
     socket.on('sentMsgs', async(myID)=>{
         const msg = await Messages.find({senderID: myID.myID});
         console.log(msg);
