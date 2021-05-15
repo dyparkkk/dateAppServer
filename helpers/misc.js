@@ -50,16 +50,17 @@ const loadMessages = (socket) => {
     socket.on('sentMsgs', async(myID)=>{
         const msg = await Messages.find({senderID: myID.myID});
         console.log(msg);
-        if(!msg) return null;
-        return msg;
-
+        if(!msg) return;
+        io.emit('sentMsgsReturn', msg);
     });
 
     socket.on('recievedMsgs', async(myID)=> {
         const msg = await Messages.find({recieverID: myID.myID});
         console.log(msg);
-        if(!msg) return null;
-        return msg;
+        if(!msg) return;
+        io.emit('recievedMsgsReturn', msg);
+        // if(!msg) return null;
+        // return msg;
     });
 };
 
