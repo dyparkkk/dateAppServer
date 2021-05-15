@@ -23,10 +23,9 @@ module.exports = (io)=>{
 
         socket.on('joinTwoUsers', async({roomID})=> {
             await socket.join(roomID);
-
         })
 
-        socket.on('sendToUser', (Data)=>{
+        socket.on('sendToUser', (data)=>{
             socket.broadcast.to(data.roomID).emit('dispatchMsg', {...data});
 
             const {
