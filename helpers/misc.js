@@ -53,7 +53,7 @@ const loadMessages = (socket) => {
 
     } );
 
-    socket.on('recievedMsgs', (myID)=> {
+    socket.on('recievedMsgs', async(myID)=> {
         const msg = await Messages.find({recieverID: myID});
         if(!msg) return null;
         return msg;
