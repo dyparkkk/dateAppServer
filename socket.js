@@ -32,7 +32,8 @@ module.exports = (io)=>{
                 roomID,
                 senderID,
                 recieverID,
-                composeMsg: {time, txtmsg},
+                time,
+                txtmsg,
             } = data;
 
             new Messages({
