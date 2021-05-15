@@ -37,10 +37,10 @@ const sessionOption = session({
     saveUninirialized: false,
     secret: process.env.COOKIE_KEY,
     cookie: {
-        httpOnly: true,
         secure: false,
+        // httpOnly: true,
     },
-    proxy: true,
+    // proxy: true,
 });
 if(process.env.NODE_ENV === 'production'){
     app.use(morgan('combined'));
@@ -73,7 +73,7 @@ app.use((err, req, res, next)=>{
     res.locals.message = err.message;
     res.locals.error = process.env.NODE_ENV !== 'prodoction' ? err : {};
     res.status(err.status || 500);
-    res.render('error');
+    res.send('error');
 });
 
 server.listen(app.get('port'), () =>{
