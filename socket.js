@@ -17,7 +17,7 @@ module.exports = (io)=>{
 
         socket.on('oneToOneChat', ({recieverID, senderID, recieverName}, callback) => {
             console.log("oneToOneChat");
-            addUser({recieverID, senderID, recieverName});
+            addUser({recieverID, senderID, recieverName}, socket);
 
         });
 
