@@ -23,6 +23,7 @@ module.exports = (io)=>{
 
         socket.on('joinTwoUsers', async({roomID})=> {
             await socket.join(roomID);
+            console.log(roomID);
         })
 
         socket.on('sendToUser', (data)=>{
