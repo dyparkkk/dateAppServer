@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     // const users = await User.find({});
-    console.log(req.session);
+    // console.log(req.session);
   } catch (err) {
     console.error(err);
     next(err);

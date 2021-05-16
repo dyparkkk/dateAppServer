@@ -32,6 +32,7 @@ router.get('/user', async(req, res, next)=> {
     try{
         if(req.user){
             res.json({
+                id: req.user.id,
                 name: req.user.name,
                 friendList: req.user.friendList
             });
