@@ -48,14 +48,14 @@ const addUser = async({recieverID, senderID }, socket)=> {
 
 const loadMessages = (socket, io) => {
     socket.on('sentMsgs', async(myID)=>{
-        const msg = await Messages.find({senderID: myID.myID});
+        const msg = await Messages.find({senderID: myID.myID}).sort({"time":-1});
         console.log(msg);
         if(!msg) return;
         io.emit('sentMsgsReturn', msg);
     });
 
     socket.on('recievedMsgs', async(myID)=> {
-        const msg = await Messages.find({recieverID: myID.myID});
+        const msg = await Messages.find({recieverID: myID.myID}).sort({"time":-1});
         console.log(msg);
         if(!msg) return;
         io.emit('recievedMsgsReturn', msg);
