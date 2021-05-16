@@ -21,7 +21,7 @@ module.exports = (io)=>{
 
         });
 
-        socket.on('joinTwoUsers', async({roomID})=> {
+        socket.on('joinTwoUsers', async(roomID)=> {
             console.log("join room !!")
             await socket.join(roomID);
             console.log(`roomID : ${roomID}`);
