@@ -49,7 +49,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
 const loadMessages = (socket)=> {     //async(socket, io) => {
     socket.on('sentMsgs', async(chatData, cb)=>{
         const {myID, roomID} = chatData;
-        const sentMsg = await Messages.find({senderID: myID, roomID:roomID}).sort({"time":1});
+        const sentMsg = await Messages.find({senderID: myID, roomID:roomID}).sort({"time":1}).exec();
         console.log("sentMsgs");
         if(!sentMsg) return cb(null);
         cb(sentMsg);
@@ -58,7 +58,7 @@ const loadMessages = (socket)=> {     //async(socket, io) => {
     socket.on('recievedMsgs', async(chatData, cb)=> {
         const {myID, roomID} = chatData;
         console.log(chatData);
-        const recievedMsg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
+        const recievedMsg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1}).exec();
         console.log("recievedMsgs");
         console.log(recievedMsg);
         if(!recievedMsg) return cb(null);
