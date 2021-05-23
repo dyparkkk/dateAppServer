@@ -32,7 +32,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
         ]);
         console.log("reciever = sender, ... ", lastAttempt);
         if(lastAttempt.length > 0){
-            socket.emit('openChat', { ...lastAttempt });
+            socket.emit('openChat', { ...lastAttempt[0] });
         } else{
             const newChat = {
                 ...user,
