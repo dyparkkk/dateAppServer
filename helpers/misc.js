@@ -62,6 +62,7 @@ const loadMessages = (socket, io) => {
         const {myID, roomID} = chatData;
         const msg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
         console.log("recievedMsgs");
+        console.log(msg);
         if(!msg) {
             console.log("not msg");
             return;
