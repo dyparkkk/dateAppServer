@@ -62,7 +62,7 @@ const loadMessages = (socket)=> {     //async(socket, io) => {
         console.log("recievedMsgs");
         console.log(recievedMsg);
         if(!recievedMsg) return cb(null);
-        return cb(msg);
+        return cb(recievedMsg);
     });
 };
 
