@@ -26,17 +26,17 @@ const addUser = async({recieverID, senderID }, socket)=> {
             {
                 $match: {
                     recieverID: senderID,
-                    senderID: recieverID
-                }
-            }
+                    senderID: recieverID,
+                },
+            },
         ]);
         if(lastAttempt > 0){
             socket.emit('openChat', { ...lastAttempt });
         } else{
             const newChat = {
                 ...user,
-                roomID: uuidV4()
-            }
+                roomID: uuidV4(),
+            };
 
             socket.emit('openChat', newChat);
             // store newChat
