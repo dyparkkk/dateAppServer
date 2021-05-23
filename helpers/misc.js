@@ -18,7 +18,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
             },
         },
     ]);
-    console.log(chat);
+    console.log("chat.length : ", chat.length);
     if(chat.length > 0){
         socket.emit('openChat', { ...chat[0] });
     } else {
@@ -30,6 +30,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
                 },
             },
         ]);
+        console.log("reciever = sender, ... ", lastAttempt);
         if(lastAttempt > 0){
             socket.emit('openChat', { ...lastAttempt });
         } else{
