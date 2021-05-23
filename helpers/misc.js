@@ -47,7 +47,7 @@ const addUser = async({recieverID, senderID }, socket)=> {
 };
 
 const loadMessages = async(socket, io) => {
-    await ocket.on('sentMsgs', async(chatData)=>{
+    await socket.on('sentMsgs', async(chatData)=>{
         const {myID, roomID} = chatData;
         const sentMsg = await Messages.find({senderID: myID, roomID:roomID}).sort({"time":1});
         console.log("sentMsgs");
