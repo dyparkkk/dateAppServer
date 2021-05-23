@@ -49,26 +49,26 @@ const addUser = async({recieverID, senderID }, socket)=> {
 const loadMessages = (socket, io) => {
     socket.on('sentMsgs', async(chatData)=>{
         const {myID, roomID} = chatData;
-        const msg = await Messages.find({senderID: myID, roomID:roomID}).sort({"time":1});
+        const sentMsg = await Messages.find({senderID: myID, roomID:roomID}).sort({"time":1});
         console.log("sentMsgs");
-        if(!msg) {
+        if(!sentMsg) {
             console.log("not msg");
             return;
         }
-        io.emit('sentMsgsReturn', msg);
-    });
+        io.emit('sentMsgsReturn', sentMsg);
+    }).then();
 
     socket.on('recievedMsgs', async(chatData)=> {
         const {myID, roomID} = chatData;
         console.log(chatData);
-        const msg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
+        const recievedMsg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
         console.log("recievedMsgs");
-        console.log(msg);
-        if(!msg) {
+        console.log(recievedMsg);
+        if(!recievedMsg) {
             console.log("not msg");
             return;
         }
-        io.emit('recievedMsgsReturn', msg);
+        io.emit('recievedMsgsReturn', recievedMsg);
         // if(!msg) return null;
         // return msg;
     });
