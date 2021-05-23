@@ -50,17 +50,19 @@ const loadMessages = (socket)=> {     //async(socket, io) => {
     socket.on('sentMsgs', async(chatData, cb)=>{
         const {myID, roomID} = chatData;
         const sentMsg = await Messages.find({roomID:roomID}).sort({"time":1});
-        console.log("sentMsgs: ");
+        console.log("sentMsgs: ", sentMsg);
+        console.log("myID : ", myID);
+        console.log("roomID : ", roomID);
         if(!sentMsg) return cb(null);
         cb(sentMsg);
     });
 
     socket.on('recievedMsgs', async(chatData, cb)=> {
         const {myID, roomID} = chatData;
-        console.log(chatData);
         const recievedMsg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
-        console.log("recievedMsgs");
-        console.log(recievedMsg);
+        console.log("recievedMsgs : ", recievedMsg);
+        console.log("myID : ", myID);
+        console.log("roomID : ", roomID);
         if(!recievedMsg) return cb(null);
         return cb(recievedMsg);
     });
