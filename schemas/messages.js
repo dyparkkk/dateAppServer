@@ -10,4 +10,4 @@ const MessagesSchema = new Schema({
 }
 // { typeKey: '$type' }
 );
-module.exports = mongoose.model('Messages', MessagesSchema);
+module.exports = mongoose.model('Messages', MessagesSchema,'messages');
