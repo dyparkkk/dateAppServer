@@ -51,7 +51,10 @@ const loadMessages = (socket, io) => {
         const {myID, roomID} = chatData;
         const msg = await Messages.find({senderID: myID, roomID:roomID}).sort({"time":1});
         console.log("sentMsgs");
-        if(!msg) return;
+        if(!msg) {
+            console.log("not msg");
+            return;
+        }
         io.emit('sentMsgsReturn', msg);
     });
 
@@ -59,7 +62,10 @@ const loadMessages = (socket, io) => {
         const {myID, roomID} = chatData;
         const msg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
         console.log("recievedMsgs");
-        if(!msg) return;
+        if(!msg) {
+            console.log("not msg");
+            return;
+        }
         io.emit('recievedMsgsReturn', msg);
         // if(!msg) return null;
         // return msg;

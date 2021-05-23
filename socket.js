@@ -28,8 +28,8 @@ module.exports = (io)=>{
         })
 
         socket.on('sendToUser', (data)=>{
-            socket.broadcast.to(data.roomID).emit('dispatchMsg', {...data});
-
+            msg = socket.broadcast.to(data.roomID).emit('dispatchMsg', {...data});
+            console.log("dispatch", msg);
             const {
                 roomID,
                 senderID,
