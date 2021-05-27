@@ -58,15 +58,15 @@ const loadMessages = (socket)=> {     //async(socket, io) => {
         cb(sentMsg);
     });
 
-    socket.on('recievedMsgs', async(chatData, cb)=> {
-        const {myID, roomID} = chatData;
-        const recievedMsg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
-        console.log("recievedMsgs : ", recievedMsg);
-        console.log("myID : ", myID);
-        console.log("roomID : ", roomID);
-        if(!recievedMsg) return cb(null);
-        return cb(recievedMsg);
-    });
+    // socket.on('recievedMsgs', async(chatData, cb)=> {
+    //     const {myID, roomID} = chatData;
+    //     const recievedMsg = await Messages.find({recieverID: myID, roomID:roomID}).sort({"time":1});
+    //     console.log("recievedMsgs : ", recievedMsg);
+    //     console.log("myID : ", myID);
+    //     console.log("roomID : ", roomID);
+    //     if(!recievedMsg) return cb(null);
+    //     return cb(recievedMsg);
+    // });
 };
 
 module.exports = {addUser, loadMessages}; 

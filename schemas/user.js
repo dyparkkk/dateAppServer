@@ -9,7 +9,13 @@ const userSchema = new Schema({
     },
     name: String,
     pwd: String,
-    friendList:[new mongoose.Schema({friendId: String, name:String})],
+    friendList:[
+        {
+            friendID: String,
+            friendName:String,
+            "_id": false
+        }
+    ],
 },{
     versionKey: false
 });

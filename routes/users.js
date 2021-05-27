@@ -60,4 +60,40 @@ router.get('/hi', async(req, res, next)=>{
     }
 });
 
+router.route('/addfriend')
+    .post(async(req, res, next)=> {
+        try{
+            if(req.user){
+                const {id, name} = await User.findOne({id:req.body.friendID});
+                await User.findOneAndUpdate(
+                    {id:req.user.id},
+                    {
+                        $addToSet:{
+                            "friendList":{
+                                friendID:id,
+                                friendName:name,
+                            }
+                        }
+                    }, function(err, addfriend){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                console.log(addfriend);
+                            }
+                        }
+                )
+                res.send("add friend");
+            } else{
+                // not login
+                console.log("not login");
+                res.send("not login");
+            }
+            
+        } catch(err){
+            console.error(err);
+            next(err);
+        }
+    })  
+
+
 module.exports = router;

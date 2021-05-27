@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
 
 const { MONGO_PASSWORD, NODE_ENV } = process.env;
 const MONGO_URL = `mongodb+srv://dyparkkk:${MONGO_PASSWORD}@cluster0.4tctp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
