@@ -1,5 +1,8 @@
 const express = require('express');
 const User = require('../schemas/user');
+const multer = require('multer');
+const upload = require('../modules/multers3');
+const UserController = require('../modules/userController');
 
 const router = express.Router();
 
@@ -45,6 +48,7 @@ router.get('/user', async(req, res, next)=> {
     }
 });
 
+// say hi
 router.get('/hi', async(req, res, next)=>{
     try{
         if(req.user){
@@ -66,7 +70,7 @@ router.route('/addfriend')
             if(req.user){
                 const {id, name} = await User.findOne({id:req.body.friendID});
                 await User.findOneAndUpdate(
-                    {id:req.user.id},
+                    { id:req.user.id },
                     {
                         $addToSet:{
                             "friendList":{
@@ -93,7 +97,22 @@ router.route('/addfriend')
             console.error(err);
             next(err);
         }
-    })  
+    });
 
+    
+router.post('/profile', upload.single('profile_picture'), (req, res) => {
+    try{
+        console.log(req.file);
+        res.json({
+            success:true,
+            url: req.file.location
+        });
+    } catch(err){
+        console.error(error);
+        next(error);
+    }
+});
+
+    
 
 module.exports = router;

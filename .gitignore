@@ -1,5 +1,7 @@
 node_modules
-uploads
 *.log
 coverage
 .env
+config/s3.json
+controllers
+modules/util.js

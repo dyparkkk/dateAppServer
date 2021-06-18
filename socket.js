@@ -1,4 +1,4 @@
-const {addUser, loadMessages} = require('./helpers/misc');
+const {addUser, loadMessages} = require('./modules/misc');
 const Messages = require('./schemas/messages');
 const User = require('./schemas/user');
 
