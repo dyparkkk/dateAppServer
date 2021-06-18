@@ -2,7 +2,6 @@ const express = require('express');
 const User = require('../schemas/user');
 const multer = require('multer');
 const upload = require('../modules/multers3');
-const UserController = require('../modules/userController');
 
 const router = express.Router();
 
