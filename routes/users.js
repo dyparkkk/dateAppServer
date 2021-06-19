@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../schemas/user');
 const multer = require('multer');
 const upload = require('../modules/multers3');
+const {isLoggedIn} = require('./islogin');
 
 const router = express.Router();
 
@@ -30,78 +31,81 @@ router.route('/')
         }
     });
 
-router.get('/user', async(req, res, next)=> {
-    try{
-        if(req.user){
-            res.json({
-                id: req.user.id,
-                name: req.user.name,
-                friendList: req.user.friendList
-            });
-        } else{
-            res.send("not login");
-        }
-    } catch(err){
+router.get('/user', isLoggedIn, async (req, res, next) => {
+    try {
+        res.json({
+            id: req.user.id,
+            name: req.user.name,
+            profileUrl: req.user.profileUrl,
+            friendList: req.user.friendList
+        });
+    } catch (err) {
         console.error(err);
         next(err);
     }
 });
 
 // say hi
-router.get('/hi', async(req, res, next)=>{
-    try{
-        if(req.user){
+router.get('/hi', async (req, res, next) => {
+    try {
+        if (req.user) {
             res.send(`hi ${req.user.name}`);
             console.log(req.user);
         }
         else {
             res.send("not login");
         }
-    }catch(err){
+    } catch (err) {
         console.error(err);
         next(err);
     }
 });
 
-router.route('/addfriend')
-    .post(async(req, res, next)=> {
-        try{
-            if(req.user){
-                const {id, name} = await User.findOne({id:req.body.friendID});
-                await User.findOneAndUpdate(
-                    { id:req.user.id },
-                    {
-                        $addToSet:{
-                            "friendList":{
-                                friendID:id,
-                                friendName:name,
-                            }
+router.route('/addfriend', isLoggedIn)
+    .post(async (req, res, next) => {
+        try {
+            const { id, name } = await User.findOne({ id: req.body.friendID });
+            await User.findOneAndUpdate(
+                { id: req.user.id },
+                {
+                    $addToSet: {
+                        "friendList": {
+                            friendID: id,
+                            friendName: name,
                         }
-                    }, function(err, addfriend){
-                            if(err){
-                                console.log(err);
-                            } else {
-                                console.log(addfriend);
-                            }
-                        }
-                )
-                res.send("add friend");
-            } else{
-                // not login
-                console.log("not login");
-                res.send("not login");
-            }
-            
-        } catch(err){
+                    }
+                }, function (err, addfriend) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(addfriend);
+                    }
+                }
+            )
+            res.send("add friend");
+        } catch (err) {
             console.error(err);
             next(err);
         }
     });
 
-    
-router.post('/profile', upload.single('profile_picture'), (req, res) => {
+router.post('/profile', isLoggedIn , upload.single('profile_picture'), async(req, res) => {
     try{
         console.log(req.file);
+        await User.findOneAndUpdate(
+            { id: req.user.id },
+            {
+                $addToSet: {
+                    "profileUrl": {
+                        url: req.file.location    
+                    }
+                }
+            }, function (err, addfriend) {
+                if (err) {
+                    console.log(err);
+                }
+            }
+        )
         res.json({
             success:true,
             url: req.file.location

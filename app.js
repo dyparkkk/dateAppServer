@@ -34,7 +34,7 @@ connectDB();
 
 const sessionOption = session({
     resave: false,
-    saveUninirialized: false,
+    saveUninirialized: true,
     secret: process.env.COOKIE_KEY,
     cookie: {
         secure: false,
