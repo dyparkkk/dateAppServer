@@ -91,7 +91,7 @@ router.route('/addfriend', isLoggedIn)
 
 router.post('/profile', isLoggedIn , upload.single('profile_picture'), async(req, res) => {
     try{
-        console.log(req.file);
+        console.log("profile :", req.file);
         await User.findOneAndUpdate(
             { id: req.user.id },
             {
