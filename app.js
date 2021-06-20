@@ -15,7 +15,6 @@ const connectDB = require('./schemas');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-const testRouter = require('./routes/jsontest');  //삭제 예정
 const passportConfig = require('./passport');
 
 // server definition
@@ -25,11 +24,6 @@ const io = socketio(server).sockets;
 
 passportConfig();
 app.set('port', process.env.PORT || 8081);
-// app.set('view engine', 'html');
-// nunjucks.configure('views', {
-//     express: app,
-//     watch: true,
-// });
 connectDB();
 
 const sessionOption = session({
@@ -47,7 +41,6 @@ if(process.env.NODE_ENV === 'production'){
 } else {
     app.use(morgan('common'));
 }
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
@@ -58,7 +51,6 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
-app.use('/jsontest', testRouter);  //삭제예정
 
 require('./socket.js')(io);
 
