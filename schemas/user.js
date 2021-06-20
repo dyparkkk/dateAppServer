@@ -10,9 +10,7 @@ const userSchema = new Schema({
     name: String,
     pwd: String,
     selfIntro:String,
-    profileUrl:[
-        {url: String}
-    ],
+    profileUrl:String,
     friendList:[
         {
             friendID: String,
