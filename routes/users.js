@@ -111,15 +111,6 @@ router.post('/profile', isLoggedIn , upload.single('profile_picture'), async(req
     }
 });
 
-router.post('/profiles', isLoggedIn, upload.array('profile_picture'), async(req, res) => {
-    try{
-        console.log(req.files);
-    } catch(err){
-        console.error(err);
-        next(err);
-    }
-});
-
 // router.post('/Selfintro', isLoggedIn, (req, res, next) => {
 //     try{
         
